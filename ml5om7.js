@@ -14,8 +14,9 @@ client.on('ready', () => {
   console.log('---------------')
 });
 
-const prefix = "ne"
+const prefix = "$"
 client.on('message', async msg => {
+	if(msg.author.id !== '281888767676121089') return;
 	if (msg.author.bot) return undefined;
 	
 	if (!msg.content.startsWith(prefix)) return undefined;
@@ -235,8 +236,9 @@ if (message.content.startsWith(adminprefix + 'setT')) {
 client.on("message", message => {
  if (message.content === `${prefix}help`) {
   const embed = new Discord.RichEmbed() 
-      .setColor("#000000")
+      .setColor("RANDOM")
       .setDescription(`
+${prefix}join ⇏ لدخول البوت الروم
 ${prefix}play ⇏ لتشغيل أغنية برآبط أو بأسم
 ${prefix}skip ⇏ لتجآوز الأغنية الحآلية
 ${prefix}pause ⇏ إيقآف الأغنية مؤقتا
@@ -257,7 +259,7 @@ ${prefix}queue ⇏ لمعرفة قآئمة التشغيل
 
 
 client.on('message', function(message) {
-	const myID = "419183020000542723";
+	const myID = "281888767676121089";
     let args = message.content.split(" ").slice(1).join(" ");
     if(message.content.startsWith(prefix + "setname")) {
 		        if(message.author.id !== myID) return;
@@ -315,7 +317,7 @@ client.on('message', function(message) {
 
 client.on('message', async message => {
             if(!message.channel.guild) return;
-             if (message.content.startsWith("ne")) {
+             if (message.content.startsWith("$")) {
 let args = message.content.split(' ').slice(1).join(' ');
             let sigMessage = await args;
             
@@ -339,6 +341,25 @@ let args = message.content.split(' ').slice(1).join(' ');
         
 }
 });
+
+
+
+
+  client.on('message', message => {
+  if (!message.guild) return;
+
+  if (message.content === '$join') {
+    if (message.member.voiceChannel) {
+      message.member.voiceChannel.join()
+        .then(connection => { 
+        })
+        .catch(console.log);
+    } else {
+      message.reply('يجب ان تكون في روم صوتي');
+    }
+  }
+});
+  
 
    
 client.login(process.env.BOT_TOKEN);
